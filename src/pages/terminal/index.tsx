@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import processCommand from "src/commands";
-import { welcome } from "src/commands/templates";
+import { banner } from "src/commands/templates";
 import Log from "src/components/Log";
 import Command from "src/components/Command";
 import useLogs from "src/store/useLogs";
+import Typewriter from "src/components/Typewriter";
 
 const user = "habib";
 
 const Terminal = () => {
-  const commandRef = React.useRef<HTMLInputElement>(null);
   const logs = useLogs((state) => state.logs);
   const setLogs = useLogs((state) => state.setLogs);
 
-  const handleCommandRunr = (command: string) => {
+  const handleCommandRun = (command: string) => {
     const result = processCommand(command);
     if (result !== null) {
       setLogs({ user, command, result });
@@ -26,20 +26,22 @@ const Terminal = () => {
   }, [logs]);
 
   return (
-    <div
-      className="terminal h-[100svh] px-20 py-5"
-      onClick={() => commandRef.current?.focus()}
-    >
-      <div className="text-3xl mb-5">{welcome}</div>
-
+    <div className="terminal min-h-[100svh] h-full max-w-[1294px] mx-auto px-2 py-5 border-x border-neutral-800">
+      <Typewriter
+        className="mb-4 text-slate-500 text-[4px] sm:text-[6px] md:text-[8px] lg:text-[10px]" // animate-pulse
+        text={banner}
+        speed={5}
+      />
       {logs.map((log, index) => (
         <Log key={index} {...log} />
       ))}
 
-      <Command ref={commandRef} user={user} run={handleCommandRunr} />
+      <Command user={user} run={handleCommandRun} />
       <div className="h-40"></div>
     </div>
   );
 };
 
 export default Terminal;
+
+// 0.6125

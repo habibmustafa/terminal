@@ -1,7 +1,8 @@
 export enum Commands {
-  HELP = 'help',
+  SPACE = '',
   CLEAR = 'clear',
   CLS = 'cls',
-  SPACE = '',
+  HELP = 'help',
+  LOGIN = 'login',
   // Diğer komutlar buraya eklenebilir
 }

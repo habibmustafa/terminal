@@ -1,19 +1,20 @@
 import { Commands } from "src/enums";
-import useLogs from "src/store/useLogs";
-import { LogType } from "src/types";
 import { help } from "./templates";
-
-type CommandHandler = () => LogType["result"];
+import { CommandHandler } from ".";
+import { History } from "src/store/useHistory";
 
 export const commandHandlers: Record<Commands, CommandHandler> = {
-  [Commands.SPACE]: () => "",
-  [Commands.HELP]: () => help,
+  [Commands.SPACE]: () => {
+    History.set("");
+  },
   [Commands.CLEAR]: () => {
-    useLogs.getState().clearLogs();
-    return null;
+    History.clear();
   },
   [Commands.CLS]: () => {
-    useLogs.getState().clearLogs();
-    return null;
+    History.clear();
   },
+  [Commands.HELP]: () => {
+    History.set(help);
+  },
+  [Commands.LOGIN]: () => {},
 };

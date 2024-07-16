@@ -5,13 +5,13 @@ export const banner = [
 ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║       ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     
 ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝       ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗
  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝        ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝</span>`,
-  "<span id='command'>Welcome to my web terminal.</span>",
-  "<span id='command'>For a list of available commands, type <span id='commander'>help</span>. </span>",
+  "<span class='command' style='font-size:14px'>Welcome to my web terminal.</span>",
+  "<span class='command' style='font-size:14px'>For a list of available commands, type <span class='commander'>help</span>. </span>",
 ];
 
 export const help = [
-  "<span id='commander'>what</span>           What's ups?",
-  "<span id='commander'>secret</span>         Find the password",
-  "<span id='commander'>help</span>           You obviously already know what this does",
-  "<span id='commander'>clear / cls</span>    Clear terminal",
+  "<span class='commander'>what</span>           What's ups?",
+  "<span class='commander'>secret</span>         Find the password",
+  "<span class='commander'>help</span>           You obviously already know what this does",
+  "<span class='commander'>clear / cls</span>    Clear terminal",
 ];

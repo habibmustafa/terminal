@@ -1,16 +1,22 @@
 import { Commands } from "src/enums";
 import { commandHandlers } from "./handlers";
-import { LogType } from "src/types";
+import { History } from "src/store/useHistory";
 
-const processCommand = (input: string): LogType["result"] => {
+export type CommandHandler = () => void;
+
+export const processCommand = (input: string) => {
   const command = input.trim().toLowerCase();
 
   const commandHandler = commandHandlers[command as Commands];
   if (commandHandler) {
     return commandHandler();
   } else {
-    return `"${command}" not found. For a list of available commands, type '<span id='commander'>help</span>'.`;
+    return History.set(
+      `"${command}" not found. For a list of available commands, type '<span class='commander'>help</span>'.`
+    );
   }
 };
 
-export default processCommand;
+
+export const commandList = Object.keys(commandHandlers)
+export const checkCommand = (command: string) => commandList.includes(command.toLowerCase())

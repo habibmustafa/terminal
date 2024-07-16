@@ -32,12 +32,11 @@ body {
   scrollbar-gutter: stable both-edges;
 }
 
-#command {
+.command {
   color: #73ABAD;
-  font-size: 14px;
 }
 
-#commander {
+.commander {
   color: #73ABAD;
   text-shadow: 0 0 5px #73ABAD;
 }

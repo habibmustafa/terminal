@@ -1,30 +1,11 @@
-import { useEffect } from "react";
-import processCommand from "src/commands";
 import { banner } from "src/commands/templates";
-import Log from "src/components/Log";
-import Command from "src/components/Command";
-import useLogs from "src/store/useLogs";
+import History from "src/components/History";
 import Typewriter from "src/components/Typewriter";
+import Input from "src/components/Input";
 
 const user = "habib";
 
 const Terminal = () => {
-  const logs = useLogs((state) => state.logs);
-  const setLogs = useLogs((state) => state.setLogs);
-
-  const handleCommandRun = (command: string) => {
-    const result = processCommand(command);
-    if (result !== null) {
-      setLogs({ user, command, result });
-    }
-  };
-
-  useEffect(() => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-    });
-  }, [logs]);
-
   return (
     <div className="terminal min-h-[100svh] h-full max-w-[1294px] mx-auto px-2 py-5 border-x border-neutral-800">
       <Typewriter
@@ -32,11 +13,9 @@ const Terminal = () => {
         text={banner}
         speed={5}
       />
-      {logs.map((log, index) => (
-        <Log key={index} {...log} />
-      ))}
+        <History />
 
-      <Command user={user} run={handleCommandRun} />
+      <Input user={user} />
       <div className="h-40"></div>
     </div>
   );

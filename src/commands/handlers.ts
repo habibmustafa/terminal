@@ -16,5 +16,7 @@ export const commandHandlers: Record<Commands, CommandHandler> = {
   [Commands.HELP]: () => {
     History.set(help);
   },
-  [Commands.LOGIN]: () => {},
+  [Commands.LOGIN]: () => {
+    History.set("WELCOME");
+  },
 };

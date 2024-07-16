@@ -7,6 +7,8 @@ export type CommandHandler = () => void;
 export const processCommand = (input: string) => {
   const command = input.trim().toLowerCase();
 
+  !!command && History.commandLogging();
+
   const commandHandler = commandHandlers[command as Commands];
   if (commandHandler) {
     return commandHandler();

@@ -11,17 +11,23 @@ const History: React.FC<any> = () => {
     });
   }, [history]);
 
-  return history.map((h) => (
-    <div key={h.id}>
-      <div className="flex gap-1">
-        <span className="min-w-max font-medium text-emerald-400">
-          habib: $ ~
-        </span>
-        <span> {h.command}</span>
+  return (
+    !!history.length && (
+      <div className="overflow-hidden">
+        {history.map((h) => (
+          <div key={h.id}>
+            <div className="flex gap-1">
+              <span className="min-w-max font-medium text-emerald-400">
+                habib: $ ~
+              </span>
+              <span> {h.command}</span>
+            </div>
+            {h.output && <Typewriter className="mb-2 ml-3" text={h.output} />}
+          </div>
+        ))}
       </div>
-      {h.output && <Typewriter className="mb-2 ml-3" text={h.output} />}
-    </div>
-  ))
+    )
+  );
 };
 
 export default History;

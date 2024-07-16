@@ -1,5 +1,5 @@
 import React from "react";
-import { processCommand, checkCommand } from "src/commands";
+import { processCommand, checkCommand, commandList } from "src/commands";
 import useHistory from "src/store/useHistory";
 
 interface InputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -15,23 +15,33 @@ const Input: React.FC<InputTypes> = ({
   type = "command",
   ...props
 }) => {
-  // const [command, setCommand] = React.useState("");
   const commandRef = React.useRef<HTMLInputElement>(null);
   const {
     command,
     setCommand,
-    commandLogging,
     lastCommandIndex,
     commandLogs,
     setLastCommandIndex,
   } = useHistory();
 
+  // Suggestion
+  const suggestCommand = () => {
+    const suggest = commandList.find((c) => c.startsWith(command));
+    if (suggest) {
+      return suggest;
+    } else {
+      return command;
+    }
+  };
+
   // Key events
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // Unique commands
     if (e.key === "Enter") {
-      !!command.trim() && commandLogging();
       return processCommand(command);
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      setCommand(suggestCommand());
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (commandLogs.length) {
@@ -64,18 +74,26 @@ const Input: React.FC<InputTypes> = ({
         </label>
       )}
 
-      <input
-        className={`w-full bg-transparent border-none outline-none caret-white ${
-          checkCommand(command) ? "command" : ""
-        }`}
-        autoFocus
-        ref={commandRef}
-        value={command}
-        onChange={(e) => setCommand(e.target.value)}
-        onBlur={() => commandRef.current?.focus()}
-        onKeyDown={handleKeyDown}
-        {...props}
-      />
+      <div className="relative">
+        <input
+          id="input"
+          className={`w-full bg-transparent border-none outline-none caret-white ${
+            checkCommand(command) ? "command" : ""
+          }`}
+          autoFocus
+          ref={commandRef}
+          value={command}
+          onChange={(e) => setCommand(e.target.value)}
+          onBlur={() => commandRef.current?.focus()}
+          onKeyDown={handleKeyDown}
+          {...props}
+        />
+        {suggestCommand() !== command && (
+          <span className="absolute left-0 -z-10 opacity-40">
+            {suggestCommand()}
+          </span>
+        )}
+      </div>
     </div>
   );
 };

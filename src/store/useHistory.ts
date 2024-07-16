@@ -61,4 +61,5 @@ export default useHistory;
 export const History = {
   set: (output: string | string[]) => useHistory.getState().setHistory(output),
   clear: () => useHistory.getState().clearHistory(),
+  commandLogging: () => useHistory.getState().commandLogging(),
 };

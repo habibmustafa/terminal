@@ -7,7 +7,7 @@ const user = "habib";
 
 const Terminal = () => {
   return (
-    <div className="terminal min-h-[100svh] h-full max-w-[1294px] mx-auto px-2 py-5 border-x border-neutral-800">
+    <div className="terminal min-h-[100svh] h-full max-w-[1294px] mx-auto px-3 py-5 border-x border-neutral-800">
       <Typewriter
         className="mb-4 text-slate-500 text-[4px] sm:text-[6px] md:text-[8px] lg:text-[10px]" // animate-pulse
         text={banner}

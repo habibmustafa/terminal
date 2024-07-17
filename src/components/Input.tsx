@@ -1,6 +1,6 @@
 import React from "react";
 import { processCommand, checkCommand, commandList } from "src/commands";
-import useHistory from "src/store/useHistory";
+import useTerminal from "src/store/useTerminal";
 
 interface InputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   user: string;
@@ -22,7 +22,7 @@ const Input: React.FC<InputTypes> = ({
     lastCommandIndex,
     commandLogs,
     setLastCommandIndex,
-  } = useHistory();
+  } = useTerminal();
 
   // Suggestion
   const suggestCommand = () => {
@@ -66,35 +66,61 @@ const Input: React.FC<InputTypes> = ({
     }
   };
 
-  return (
-    <div className="flex gap-1 relative">
-      {type === "command" && (
-        <label className="min-w-max font-medium text-emerald-400">
-          {user}: $ ~
-        </label>
-      )}
+  // Key events Prompt
+  const handleKeyDownPrompt = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      return run && run(command);
+    }
+  };
 
-      <div className="relative">
-        <input
-          id="input"
-          className={`w-full bg-transparent border-none outline-none caret-white ${
-            checkCommand(command) ? "command" : ""
-          }`}
-          autoFocus
-          ref={commandRef}
-          value={command}
-          onChange={(e) => setCommand(e.target.value)}
-          onBlur={() => commandRef.current?.focus()}
-          onKeyDown={handleKeyDown}
-          {...props}
-        />
-        {suggestCommand() !== command && (
-          <span className="absolute left-0 -z-10 opacity-40">
-            {suggestCommand()}
-          </span>
-        )}
-      </div>
-    </div>
+  return (
+    <>
+      {type === "command" && (
+        <div className="flex gap-1 relative">
+          <label className="min-w-max font-medium text-emerald-400">
+            {user}: $ ~
+          </label>
+
+          <div className="relative">
+            <input
+              className={`w-full bg-transparent border-none outline-none caret-white ${
+                checkCommand(command) ? "command" : ""
+              }`}
+              autoFocus
+              ref={commandRef}
+              value={command}
+              onChange={(e) => setCommand(e.target.value)}
+              onBlur={() => commandRef.current?.focus()}
+              onKeyDown={handleKeyDown}
+              {...props}
+            />
+            {suggestCommand() !== command && (
+              <span className="absolute left-0 -z-10 opacity-40">
+                {suggestCommand()}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+      {type === "prompt" && (
+        <div className="flex gap-1 relative">
+          <label className="min-w-max font-medium text-emerald-400">
+            {`>>>`}
+          </label>
+
+          <input
+            className={`w-full bg-transparent border-none outline-none caret-white`}
+            autoFocus
+            ref={commandRef}
+            value={command}
+            onChange={(e) => setCommand(e.target.value)}
+            onBlur={() => commandRef.current?.focus()}
+            onKeyDown={handleKeyDownPrompt}
+            {...props}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

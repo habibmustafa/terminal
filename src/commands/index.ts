@@ -1,19 +1,19 @@
 import { Commands } from "src/enums";
 import { commandHandlers } from "./handlers";
-import { History } from "src/store/useHistory";
+import { Terminal } from "src/store/useTerminal";
 
 export type CommandHandler = () => void;
 
 export const processCommand = (input: string) => {
   const command = input.trim().toLowerCase();
 
-  !!command && History.commandLogging();
+  !!command && Terminal.commandLogging();
 
   const commandHandler = commandHandlers[command as Commands];
   if (commandHandler) {
     return commandHandler();
   } else {
-    return History.set(
+    return Terminal.write(
       `"${command}" not found. For a list of available commands, type '<span class='commander'>help</span>'.`
     );
   }

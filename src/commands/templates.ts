@@ -10,7 +10,7 @@ export const banner = [
 ];
 
 export const help = [
-  "<span class='commander'>what</span>           What's ups?",
+  "<span class='commander'>what</span>           What's up?",
   "<span class='commander'>secret</span>         Find the password",
   "<span class='commander'>help</span>           You obviously already know what this does",
   "<span class='commander'>clear / cls</span>    Clear terminal",

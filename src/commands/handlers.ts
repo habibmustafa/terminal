@@ -1,22 +1,22 @@
 import { Commands } from "src/enums";
-import { help } from "./templates";
+import { banner, help } from "./templates";
 import { CommandHandler } from ".";
-import { History } from "src/store/useHistory";
+import { Terminal } from "src/store/useTerminal";
 
 export const commandHandlers: Record<Commands, CommandHandler> = {
   [Commands.SPACE]: () => {
-    History.set("");
+    Terminal.write("");
   },
   [Commands.CLEAR]: () => {
-    History.clear();
+    Terminal.clear();
   },
   [Commands.CLS]: () => {
-    History.clear();
+    Terminal.clear();
   },
   [Commands.HELP]: () => {
-    History.set(help);
+    Terminal.write(help);
   },
   [Commands.LOGIN]: () => {
-    History.set("WELCOME");
+    Terminal.write(banner);
   },
 };

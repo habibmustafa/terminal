@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Typewriter from "src/components/Typewriter";
-import useHistory from "src/store/useHistory";
+import useTerminal from "src/store/useTerminal";
 
 const History: React.FC<any> = () => {
-  const history = useHistory((state) => state.history);
+  const history = useTerminal((state) => state.history);
 
   useEffect(() => {
     window.scrollTo({

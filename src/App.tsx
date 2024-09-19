@@ -1,4 +1,4 @@
-import Terminal from "./pages/terminal";
+// import Terminal from "./pages/terminal";
 
 const App = () => {
   return (

@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react";
 import svgr from "@svgr/rollup";
 
 export default defineConfig({
-  base: "/",
   server: {
     host: "0.0.0.0",
     port: 3000,

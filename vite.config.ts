@@ -30,5 +30,5 @@ export default defineConfig({
     },
   },
   plugins: [svgr(), react(), splitVendorChunkPlugin()],
-  base: "/terminal",
+  base: "/",
 });
